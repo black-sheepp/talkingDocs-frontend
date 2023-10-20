@@ -1,4 +1,3 @@
-import React from "react";
 import Styles from "./Logo.module.css";
 
 const Logo = () => {
