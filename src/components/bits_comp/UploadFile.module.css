@@ -15,12 +15,14 @@
     font-size: 2rem;
     cursor: pointer;
     animation: iconflicker 2s linear infinite;
-    cursor: pointer;
 }
 
 .input {
     position: absolute;
     opacity: 0;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
 }
 
 @keyframes flicker {

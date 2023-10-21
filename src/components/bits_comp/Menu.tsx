@@ -1,10 +1,10 @@
+import React from "react";
 import {
   LogOut,
   User,
   GalleryVerticalEnd,
-} from "lucide-react"
-
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,15 +13,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useState } from "react"
+} from "@/components/ui/dropdown-menu";
 
-export function DropdownMenuDemo({username,handlelogout}:{username: any, handlelogout: any}) {
+interface DropdownMenuDemoProps {
+  username: string | null;
+  handlelogout: () => void;
+}
 
+export function DropdownMenuDemo({ username, handlelogout }: DropdownMenuDemoProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{username}</Button>
+        <Button variant="outline">{username || "Guest"}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -38,11 +41,11 @@ export function DropdownMenuDemo({username,handlelogout}:{username: any, handlel
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handlelogout}>
           <LogOut className="mr-2 h-4 w-4" />
-          <span onClick={handlelogout}>Log out</span>
+          <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
