@@ -1,6 +1,6 @@
 import Styles from "./bits_comp/UploadFile.module.css";
 
-const DocUpload = ({ handlePdf }: { handlePdf: any }) => {
+const DocUpload = ({ handlePdf, handleFileUpload }: { handlePdf: any, handleFileUpload: any }) => {
 	return (
 		<div className='flex flex-col'>
 			<p className='text-center mt-20 text-3xl lg:text-4xl font-semibold text-[#01EBFC]'>
@@ -11,9 +11,9 @@ const DocUpload = ({ handlePdf }: { handlePdf: any }) => {
 				dull. it's a blast!" 😎
 			</p>
 			<div className='flex my-6 justify-center p-5'>
-				<form method="POST" onSubmit={handlePdf}>
+				<form onSubmit={handlePdf}>
 					<div className={Styles.input_div} id='file'>
-						<input className={Styles.input} name='PDF' type='file' />
+						<input className={Styles.input} name='PDF' type='file' accept="application/pdf" onChange={handleFileUpload}/>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							width='2em'

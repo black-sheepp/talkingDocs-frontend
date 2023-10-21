@@ -6,10 +6,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { useEffect, useState } from "react";
 import PDFLoader from "./components/bits_comp/PDFLoader";
 import TextLoader from "./components/bits_comp/TextLoader";
+import axios from "axios";
 
 function App() {
 	const [form, setForm] = useState({});
 	const [logout, setLogout] = useState(true);
+	const [pdfFile, setPdfFile] = useState();
 
 	useEffect(() => {
 		const user = localStorage.getItem("user");
@@ -99,18 +101,40 @@ function App() {
 		return tokenValue;
 	}
 
-	const handlepdf = async (event: any) => {
-		const file = event.target.files[0]; // Get the first selected file
+	function getUserId(): string | null {
+		const jsonString = localStorage.getItem("user");
+		function getNameValueFromJSON(jsonString: any): any | null {
+			try {
+				const data = JSON.parse(jsonString);
+				if (data && typeof data._id === "string") {
+					return data._id;
+				} else {
+					return null;
+				}
+			} catch (error) {
+				return null;
+			}
+		}
+		const _id = getNameValueFromJSON(jsonString);
+		return _id;
+	}
 
-		if (file) {
-			const formData = new FormData();
-			formData.append("pdf", file); // 'pdf' should match the server's expected field name for the file
-			// Make a POST request to the server to upload the file
-			await fetch("http://localhost:8080/pdf-upload", {
-				method: "POST",
-				body: formData,
-				headers: { "content-type": "application/x-www-form-urlencoded" },
+	const handleFileUpload = (event: any) => {
+		console.log(event.target.files);
+		setPdfFile(event.target.files[0]);
+	};
+
+	const handlepdf = async (event: any) => {
+		event.preventDefault();
+		const formData = new FormData();
+		formData.append("pdf_location", pdfFile);
+
+		try {
+			const response = await axios.post(`http://localhost:8080/pdf-upload/${getUserId()}`, formData, {
+				headers: { "Content-Type": "multipart/form-data" },
 			});
+		} catch (error) {
+			console.error("Error during file upload:", error);
 		}
 	};
 
@@ -128,7 +152,7 @@ function App() {
 				/>
 				<div className='flex flex-col justify-center px-8 lg:px-20'>
 					{!logout ? (
-						<DocUpload handlePdf={handlepdf} />
+						<DocUpload handlePdf={handlepdf} handleFileUpload={handleFileUpload} />
 					) : (
 						<>
 							<p className='text-center text-2xl lg:text-2xl  mt-24'>
