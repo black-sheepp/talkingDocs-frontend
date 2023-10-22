@@ -1,7 +1,7 @@
 .messagingApp {
     padding-top: 70px;
     width: 80wh;
-    height: 100vh;
+    height: 96vh;
 }
 
 .messageWrapper {
@@ -42,6 +42,8 @@
     box-sizing: border-box;
     padding: .6rem 1.2rem;
     color: black;
+    /* font-size: 1rem; */
+    text-align: left;
 }
 
 .chat~.chat {
@@ -53,6 +55,7 @@
     background-color: #aab2ff;
     box-shadow: none;
     border: none;
+    text-align: right;
 }
 
 .textbox {

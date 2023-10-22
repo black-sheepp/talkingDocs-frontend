@@ -62,28 +62,28 @@ export function SignUp({handleSubmit,handleForm}:{handleSubmit: any, handleForm:
 							/>
 						</div>
 						<div className='grid grid-cols-4 items-center gap-4'>
-							<Label htmlFor='phone' className='text-right'>
-								Phone
+							<Label htmlFor='gitHub' className='text-right'>
+								GitHub
 							</Label>
 							<Input
-								id='phone'
+								id='gitHub'
 								type='62341876'
 								placeholder='*******'
 								className='col-span-3'
-								name='phone'
+								name='github'
 								onChange={handleForm}
 							/>
 						</div>
 						<div className='grid grid-cols-4 items-center gap-4'>
-							<Label htmlFor='bio' className='text-right'>
-								About Yourself
+							<Label htmlFor='linkedIn' className='text-right'>
+								LinkedIn
 							</Label>
 							<Input
-								id='bio'
+								id='linkedIn'
 								type='62341876'
 								placeholder='*******'
 								className='col-span-3'
-								name='bio'
+								name='linkedIn'
 								onChange={handleForm}
 							/>
 						</div>

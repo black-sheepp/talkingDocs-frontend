@@ -6,7 +6,7 @@ const PDFLoader = () => {
 		<div className="flex justify-center">
 			<div className={Styles.spinner}>
 				<div className={Styles.inner}>
-                    <p className={Styles.innermsg}> Uploading...</p>
+                    <p className={Styles.innermsg}> Uploading PDF</p>
                 </div>
 			</div>
 		</div>

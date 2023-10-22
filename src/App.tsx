@@ -12,6 +12,8 @@ function App() {
 	const [form, setForm] = useState({});
 	const [logout, setLogout] = useState(true);
 	const [pdfFile, setPdfFile] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+	const [upload, setUpload] = useState(false);
 
 	useEffect(() => {
 		const user = localStorage.getItem("user");
@@ -36,7 +38,6 @@ function App() {
 			headers: { "Content-Type": "application/json" },
 		});
 		const data = await response.json();
-		// console.log(data);
 		setForm(data);
 		setLogout(false);
 		localStorage.setItem("user", JSON.stringify(data));
@@ -126,6 +127,7 @@ function App() {
 
 	const handlepdf = async (event: any) => {
 		event.preventDefault();
+		setIsLoading(true);
 		const formData = new FormData();
 		formData.append("pdf_location", pdfFile);
 
@@ -133,14 +135,22 @@ function App() {
 			const response = await axios.post(`http://localhost:8080/pdf-upload/${getUserId()}`, formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 			});
+			console.log(response);
+			if (response.status === 200) {
+				setIsLoading(false);
+				setUpload(true);
+			}
 		} catch (error) {
 			console.error("Error during file upload:", error);
 		}
 	};
 
+	const resetUpload = () => {
+		setUpload(false);
+	}
 	return (
 		<ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-			<div className='h-screen pt-4'>
+			<div className='h-screen'>
 				<Nav
 					handleForm={handleForm}
 					handleSubmit={handleSubmit}
@@ -150,12 +160,18 @@ function App() {
 					fetchToken={fetchToken()}
 					logoutStatus={logout}
 				/>
-				<div className='flex flex-col justify-center px-8 lg:px-20'>
+				<div className='flex flex-col justify-center px-8 mt-10 lg:px-20'>
 					{!logout ? (
-						<DocUpload handlePdf={handlepdf} handleFileUpload={handleFileUpload} />
+						isLoading ? (
+							<PDFLoader />
+						) : upload ? (
+							<ChatBot resetUpload={resetUpload} />
+						) : (
+							<DocUpload handlePdf={handlepdf} handleFileUpload={handleFileUpload} />
+						)
 					) : (
 						<>
-							<p className='text-center text-2xl lg:text-2xl  mt-24'>
+							<p className='text-center text-2xl lg:text-2xl mt-24'>
 								Sign Up / Sign In with{" "}
 								<strong className='text-[#01EBFC] text-5xl'>TalkingDocs</strong>.
 							</p>
@@ -169,7 +185,6 @@ function App() {
 							</p>
 						</>
 					)}
-					{/* <ChatBot/> */}
 				</div>
 			</div>
 		</ThemeProvider>
