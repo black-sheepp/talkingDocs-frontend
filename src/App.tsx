@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import PDFLoader from "./components/bits_comp/PDFLoader";
 import axios from "axios";
 
+const BASE_URL = "https://talkingdocs-67jr.onrender.com/"
+
 function App() {
 	const [form, setForm] = useState({}); // User form data
 	const [logout, setLogout] = useState(true); // User logout status
@@ -25,7 +27,7 @@ function App() {
 	// Handle form submission for user sign-up
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		const response = await fetch("http://localhost:8080/sign-up", {
+		const response = await fetch(`${BASE_URL}/sign-up`, {
 			method: "POST",
 			body: JSON.stringify(form),
 			headers: { "Content-Type": "application/json" },
@@ -39,7 +41,7 @@ function App() {
 	// Handle form submission for user sign-in
 	const handleSignIn = async (e: any) => {
 		e.preventDefault();
-		const response = await fetch("http://localhost:8080/sign-in", {
+		const response = await fetch(`${BASE_URL}/sign-in`, {
 			method: "POST",
 			body: JSON.stringify(form),
 			headers: { "Content-Type": "application/json" },
@@ -53,7 +55,7 @@ function App() {
 
 	// Handle user logout
 	const handlelogout = async () => {
-		await fetch("http://localhost:8080/logout", {
+		await fetch(`${BASE_URL}/logout`, {
 			method: "GET",
 		});
 		await localStorage.setItem("user", "");
@@ -144,7 +146,7 @@ function App() {
 
 		try {
 			// Make a POST request to upload the PDF file
-			const response = await axios.post(`http://localhost:8080/pdf-upload/${getUserId()}`, formData, {
+			const response = await axios.post(`${BASE_URL}/pdf-upload/${getUserId()}`, formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 			});
 			console.log(response);
