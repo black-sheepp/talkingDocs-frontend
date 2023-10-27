@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import PDFLoader from "./components/bits_comp/PDFLoader";
 import axios from "axios";
 
-const BASE_URL = "https://talkingdocs-67jr.onrender.com/";
+const BASE_URL = "https://talkingdocs-67jr.onrender.com";
 
 function App() {
 	const [form, setForm] = useState({}); // User form data

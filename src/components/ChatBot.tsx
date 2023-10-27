@@ -6,7 +6,7 @@ import TextLoader from "./bits_comp/TextLoader";
 import axios from "axios";
 import { Send, UploadCloud } from "lucide-react";
 
-const BASE_URL = "https://talkingdocs-67jr.onrender.com/"
+const BASE_URL = "https://talkingdocs-67jr.onrender.com"
 
 const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 	const [chatLLM, setChatLLM] = useState<string[]>([]); // Stores chat messages
