@@ -50,6 +50,7 @@ function App() {
 		// console.log(data);
 		setForm(data);
 		setLogout(false);
+		setUpload(false);
 		localStorage.setItem("user", JSON.stringify(data));
 	};
 
@@ -134,30 +135,6 @@ function App() {
 		console.log(event.target.files);
 		setPdfFile(event.target.files[0]);
 	};
-
-	// Handle the PDF file upload
-	// const handlepdf = async (event: any) => {
-	// 	event.preventDefault();
-	// 	setIsLoading(true);
-
-	// 	// Create a FormData object and append the selected PDF file
-	// 	const formData = new FormData();
-	// 	formData.append("pdf_location", pdfFile);
-
-	// 	try {
-	// 		// Make a POST request to upload the PDF file
-	// 		const response = await axios.post(`${BASE_URL}/pdf-upload/${getUserId()}`, formData, {
-	// 			headers: { "Content-Type": "multipart/form-data" },
-	// 		});
-	// 		console.log(response);
-	// 		if (response.status === 200) {
-	// 			setIsLoading(false);
-	// 			setUpload(true);
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Error during file upload:", error);
-	// 	}
-	// };
 
 	// Handle the PDF file upload
 	const handlepdf = async (event: any) => {
