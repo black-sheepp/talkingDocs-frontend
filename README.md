@@ -2,13 +2,11 @@
 
 ## Project Challenges
 
-When I was given the task to work on the "Talking Docs: Give PDFs a Voice with AI" project, my approach was to make it user-friendly and visually appealing. For the front-end part, I used Vite ReactJS along with Tailwind CSS to make the user interface look good, and I used Styled Module CSS to style components. I also added some Shadcn components like Profile Menu, buttons, forms, and input fields to make them look nice.
+For the front-end part, I used Vite ReactJS along with Tailwind CSS to make the user interface look good, and I used Styled Module CSS to style components. I also added some Shadcn components like Profile Menu, buttons, forms, and input fields to make them look nice.
 
 On the back-end, I used Node.js with Express.js for handling requests and MongoDB to store user information and manage user logins. To keep things secure, I used JSON Web Tokens for user authentication, making sure that only authorized users could access certain parts of the project.
 
-For handling PDF files, I used a tool called Multer to store the files and their locations in the database. Then, I processed the uploaded PDFs, breaking them into smaller parts and storing them in a HNSW Vector Store provided by Langchain.
-
-Working with Langchain, which is a new topic for me to explore, was a bit challenging at first. But I found it interesting and decided to dive deeper into it. Through research and learning, I managed to overcome the challenges and come up with a unique solution that aligns with the project's goals. This journey expanded my skills and gave me a better understanding of the possibilities offered by advanced technology like Langchain and RAG.
+For handling PDF files, I used a tool called Multer to store the files and their locations in the database. Then, I processed the uploaded PDFs, breaking them into smaller parts and storing them in a HNSW Vector Store provided by Langchain. This journey expanded my skills and gave me a better understanding of the possibilities offered by advanced technology like Langchain and RAG.
 
 
 ## Table of Contents
@@ -91,10 +89,8 @@ User information is stored in MongoDB, a flexible NoSQL database. User data is s
 I have used Multer, a middleware for handling file uploads, allowing users to upload files like images or documents. This feature enhances the user experience by supporting multimedia content.
 
 ## Frontend and UI
-
 The frontend is designed with a user-friendly interface using Tailwind CSS and the Shadcn Framework. It offers a responsive and visually appealing experience for users.
 
 ## API Endpoints
 
 The backend provides various API endpoints to manage user data, authentication, and file uploads. These endpoints are documented in the code, and you can find more details in the backend's codebase.
-
