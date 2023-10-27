@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import TextLoader from "./bits_comp/TextLoader";
 import axios from "axios";
+import { Send, UploadCloud } from "lucide-react";
 
 const BASE_URL = "https://talkingdocs-67jr.onrender.com/"
 
