@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import Styles from "./ChatBot.module.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Send, UploadCloud } from "lucide-react";
 import TextLoader from "./bits_comp/TextLoader";
 import axios from "axios";
-import { Send, UploadCloud } from "lucide-react";
-
-const BASE_URL = "https://talkingdocs-67jr.onrender.com"
 
 const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 	const [chatLLM, setChatLLM] = useState<string[]>([]); // Stores chat messages
@@ -23,7 +21,7 @@ const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 		e.preventDefault();
 		setChatQuery([...chatQuery, query]);
 		setQuery(""); // Clear the input field
-		const response = await axios.post(`${BASE_URL}/query`, { query });
+		const response = await axios.post(`http://localhost:8080/query`, { query });
 		if (response.status === 200) {
 			const data = response.data;
 			// Update chatLLM with the acknowledgment text from the server
@@ -32,6 +30,16 @@ const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 		} else {
 			console.error("Failed to retrieve data from the server");
 		}
+	};
+
+	// Function to format string new line "\n" with html <br />
+	const formatTextWithLineBreaks = (text: string) => {
+		return text.split("\n").map((line, index) => (
+			<React.Fragment key={index}>
+				{line}
+				<br />
+			</React.Fragment>
+		));
 	};
 
 	// Effect to log when chatLLM state changes
@@ -50,7 +58,11 @@ const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 				{chatQuery.map((userQuery, index) => (
 					<div key={index} id='messages' className={Styles.messages}>
 						<div className={`${Styles.chat} ${Styles.me}`}>{userQuery}</div>
-						{chatLLM[index] ? <div className={Styles.chat}>{chatLLM[index]}</div> : <TextLoader />}
+						{chatLLM[index] ? (
+							<div className={Styles.chat}>{formatTextWithLineBreaks(chatLLM[index])}</div>
+						) : (
+							<TextLoader />
+						)}
 					</div>
 				))}
 			</div>
