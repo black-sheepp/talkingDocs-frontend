@@ -1,4 +1,4 @@
-import React from "react";
+
 import Styles from "./TextLoader.module.css";
 
 const TextLoader = () => {

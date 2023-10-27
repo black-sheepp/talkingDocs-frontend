@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Styles from "./ChatBot.module.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader, Send, UploadCloud } from "lucide-react";
 import TextLoader from "./bits_comp/TextLoader";
 import axios from "axios";
 

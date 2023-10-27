@@ -1,4 +1,4 @@
-import React from "react";
+
 import Styles from "./PDFLoader.module.css";
 
 const PDFLoader = () => {
