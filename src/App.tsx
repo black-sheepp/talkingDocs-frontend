@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import PDFLoader from "./components/bits_comp/PDFLoader";
 import axios from "axios";
 
-const BASE_URL = "https://talkingdocs-67jr.onrender.com/"
+const BASE_URL = "https://talkingdocs-67jr.onrender.com/";
 
 function App() {
 	const [form, setForm] = useState({}); // User form data
@@ -136,26 +136,56 @@ function App() {
 	};
 
 	// Handle the PDF file upload
+	// const handlepdf = async (event: any) => {
+	// 	event.preventDefault();
+	// 	setIsLoading(true);
+
+	// 	// Create a FormData object and append the selected PDF file
+	// 	const formData = new FormData();
+	// 	formData.append("pdf_location", pdfFile);
+
+	// 	try {
+	// 		// Make a POST request to upload the PDF file
+	// 		const response = await axios.post(`${BASE_URL}/pdf-upload/${getUserId()}`, formData, {
+	// 			headers: { "Content-Type": "multipart/form-data" },
+	// 		});
+	// 		console.log(response);
+	// 		if (response.status === 200) {
+	// 			setIsLoading(false);
+	// 			setUpload(true);
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Error during file upload:", error);
+	// 	}
+	// };
+
+	// Handle the PDF file upload
 	const handlepdf = async (event: any) => {
 		event.preventDefault();
 		setIsLoading(true);
 
-		// Create a FormData object and append the selected PDF file
-		const formData = new FormData();
-		formData.append("pdf_location", pdfFile);
+		if (pdfFile) {
+			// Check if pdfFile is defined
+			// Create a FormData object and append the selected PDF file
+			const formData = new FormData();
+			formData.append("pdf_location", pdfFile);
 
-		try {
-			// Make a POST request to upload the PDF file
-			const response = await axios.post(`${BASE_URL}/pdf-upload/${getUserId()}`, formData, {
-				headers: { "Content-Type": "multipart/form-data" },
-			});
-			console.log(response);
-			if (response.status === 200) {
-				setIsLoading(false);
-				setUpload(true);
+			try {
+				// Make a POST request to upload the PDF file
+				const response = await axios.post(`${BASE_URL}/pdf-upload/${getUserId()}`, formData, {
+					headers: { "Content-Type": "multipart/form-data" },
+				});
+				console.log(response);
+				if (response.status === 200) {
+					setIsLoading(false);
+					setUpload(true);
+				}
+			} catch (error) {
+				console.error("Error during file upload:", error);
 			}
-		} catch (error) {
-			console.error("Error during file upload:", error);
+		} else {
+			console.error("pdfFile is undefined");
+			// Handle the case where pdfFile is not defined (you can display an error message or take appropriate action)
 		}
 	};
 
