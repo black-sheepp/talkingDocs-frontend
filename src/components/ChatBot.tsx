@@ -6,6 +6,8 @@ import { Send, UploadCloud } from "lucide-react";
 import TextLoader from "./bits_comp/TextLoader";
 import axios from "axios";
 
+const BASE_URL = "https://talkingdocs-67jr.onrender.com";
+
 const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 	const [chatLLM, setChatLLM] = useState<string[]>([]); // Stores chat messages
 	const [query, setQuery] = useState<string>(""); // Stores user question input
@@ -21,7 +23,7 @@ const ChatBot = ({ resetUpload }: { resetUpload: any }) => {
 		e.preventDefault();
 		setChatQuery([...chatQuery, query]);
 		setQuery(""); // Clear the input field
-		const response = await axios.post(`http://localhost:8080/query`, { query });
+		const response = await axios.post(`${BASE_URL}/query`, { query });
 		if (response.status === 200) {
 			const data = response.data;
 			// Update chatLLM with the acknowledgment text from the server
